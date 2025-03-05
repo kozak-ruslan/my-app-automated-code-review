@@ -35,7 +35,7 @@ export const LoginForm = () => {
                         permission: 'delete:comments'
                     }) && (
                         <div>
-                            -- role:admin; permission: "delete:comments" --
+                            {"-- role:admin; permission: 'delete:comments' --"}
                         </div>
                     )}
                     {hasPermission({
@@ -43,8 +43,9 @@ export const LoginForm = () => {
                         permission: 'view:comments'
                     }) && (
                         <div>
-                            -- role:admin, manager, user; permission:
-                            "view:comments" --
+                            {
+                                " -- role:admin, manager, user; permission: 'view:comments' --"
+                            }
                         </div>
                     )}
                     {hasPermission({
@@ -52,8 +53,9 @@ export const LoginForm = () => {
                         permission: 'update:comments'
                     }) && (
                         <div>
-                            -- roles:admin, manager; permission:
-                            "update:comments" --
+                            {
+                                "-- roles:admin, manager; permission: 'update:comments' --"
+                            }
                         </div>
                     )}
                 </>
