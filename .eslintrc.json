@@ -6,12 +6,16 @@
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
-    "plugins": ["prettier"],
+    "plugins": ["prettier", "react-hooks"],
     "rules": {
         "prettier/prettier": "error",
+
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
         // React hooks
         "react-hooks/rules-of-hooks": "warn",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/no-unescaped-entities": "error"
     },
     "parserOptions": {
         "requireConfigFile": false,
