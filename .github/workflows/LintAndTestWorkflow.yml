@@ -20,6 +20,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
 
             - name: step 2 -> Build
-              run: ci
+              run: npm i
+              # run: ci
             - name: step 3 -> Run lint and test
               run: npm run lint && npm run test
