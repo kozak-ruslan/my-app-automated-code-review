@@ -1,23 +1,25 @@
 name: Lint and Test
 
 on:
-  pull_request:
-    branches:
-      - main
+    pull_request:
+        branches: ['main']
 
 jobs:
-  lint-and-test:
-    name: Lint and Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.16]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - npm: run lint
-      - npm: run test
+    lint-and-test:
+        name: Lint and Test
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.x]
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: step1 -> Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: step 2 -> Build
+              run: ci
+            - name: step 3 -> Run lint and test
+              run: npm run lint && npm run test
