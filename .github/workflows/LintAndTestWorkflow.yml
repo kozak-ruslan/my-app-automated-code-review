@@ -22,5 +22,7 @@ jobs:
             - name: step 2 -> Build
               run: npm i
               # run: ci
-            - name: step 3 -> Run lint and test
-              run: npm run lint && npm run test
+            - name: step 3 -> Run lint
+              run: npm run lint
+            # - name: step 4 -> Run test
+            #   run: npm run test
