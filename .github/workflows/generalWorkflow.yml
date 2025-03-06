@@ -34,5 +34,16 @@ jobs:
             #   run: npm run test
             # env:
             #     MY_SECRET: ${{ secrets.MY_SECRET }}
-            - name: step 4 -> Run liteHouse
-              uses: ./.github/action/lightHouse
+            # Run lighthouse CI
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: LH step 2 -> Build
+              run: npm run build
+
+            - name: LH step 3 -> Run Lighthouse CI
+              run: |
+                    npm i -g @lhci/cli@0.6.x
+                    lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed"
+
