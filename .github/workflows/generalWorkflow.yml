@@ -1,8 +1,13 @@
-name: Lint and Test
+name: General Workflow
 
 on:
     pull_request:
         branches: ['main']
+        paths-ignore:
+          - '**.md'
+          - 'docs/**'
+    # schedule:
+      # - cron: '0 5 * * 1' # run pipeline every Monday at 5:00 AM UTC
 
 jobs:
     lint-and-test:
@@ -12,17 +17,22 @@ jobs:
             matrix:
                 node-version: [18.x]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@main
 
             - name: step1 -> Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@main
               with:
                   node-version: ${{ matrix.node-version }}
 
             - name: step 2 -> Build
               run: npm i
               # run: ci
+
             - name: step 3 -> Run lint
               run: npm run lint
             # - name: step 4 -> Run test
             #   run: npm run test
+            # env:
+            #     MY_SECRET: ${{ secrets.MY_SECRET }}
+            - name: step 4 -> Run liteHouse
+              uses: ./.github/action/lightHouse
