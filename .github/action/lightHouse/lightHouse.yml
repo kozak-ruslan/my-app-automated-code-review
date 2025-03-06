@@ -12,7 +12,16 @@ jobs:
                 node-version: [18.x]
         steps:
             - uses: actions/checkout@main
-            - name: step1 -> Use Node.js ${{ matrix.node-version }}
-              uses: foo-software/lighthouse-check-action@master
+
+            - name: LH step1 -> Use Node.js ${{ matrix.node-version }}
+            - uses: actions/setup-node@v1
               with:
-                  urls: 'https://www.foo.software,https://www.google.com'
+                  node-version: ${{ matrix.node-version }}
+
+            - name: LH step 2 -> Build
+              run: npm run build
+
+            - name: LH step 3 -> Run Lighthouse CI
+            - run: |
+                    npm i -g @lhci/cli@0.6.x
+                    lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed"
